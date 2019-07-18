@@ -32,7 +32,6 @@ public class DepartmentController {
         departmentBiz.add(department);
         // 重定向到控制器,直接去 department_list 静态页面是没有信息的, 要经过 map.put 添加信息
         return "redirect:list";
-
     }
 
 }
