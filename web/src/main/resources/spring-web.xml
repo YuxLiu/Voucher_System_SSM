@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+<!--    引入 biz 层依赖-->
+    <import resource="spring-biz.xml"/>
+
+    <context:component-scan base-package="com.ssm.ob.controller"/>
+
+    <mvc:annotation-driven/>
+
+<!--    指定静态资源交给servlet处理, 没必要给springMVC-->
+    <mvc:default-servlet-handler/>
+
+<!--    view-model resolver-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<!--        需要指定以下至少3个属性-->
+<!--        指定view类型, 即转换规则-->
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+<!--        配置页面路径, 方便-->
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>

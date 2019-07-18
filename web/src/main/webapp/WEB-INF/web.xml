@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" version="2.4">
+
+<!--    使用DispatcherServlet接管Request请求-->
+    <servlet>
+        <servlet-name>springMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+<!--            告知springMVC配置文件路径-->
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring-web.xml</param-value>
+        </init-param>
+<!--        项目启动时自动加载-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springMVC</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+</web-app>

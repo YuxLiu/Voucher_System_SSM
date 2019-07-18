@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+<!-- dao层: 数据源, session工厂, mapper接口 -->
+    <context:component-scan base-package="com.ssm.ob.dao"/>
+
+    <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/oa"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root1234"/>
+    </bean>
+
+<!--    mybatis-spring 提供-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="datasource"/>
+<!--        别名, 在指定包下使用时, com.ssm.Classname -> Classname    -->
+        <property name="typeAliasesPackage" value="com.ssm.ob.entity"/>
+    </bean>
+
+<!--    mapper 按包名自动关联 : Interface 和 sql文件-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+<!--        指定 sqlSessionFactory 的 bean -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+<!--        指定包名, interface 与 sql map 都放在相同包名下,即 namespace -->
+        <property name="basePackage" value="com.ssm.ob.dao"/>
+    </bean>
+
+</beans>
