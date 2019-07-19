@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository// 添加("departmentDao") 会导致 biz.departmentDao bean 要求 qualify
+@Repository
 public interface EmployeeDao {
     void insert(Employee employee);
 

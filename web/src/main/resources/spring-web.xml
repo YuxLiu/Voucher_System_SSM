@@ -25,4 +25,11 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+<!--            拦截所有路径-->
+            <mvc:mapping path="/**"/>
+            <bean class="com.ssm.ob.global.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

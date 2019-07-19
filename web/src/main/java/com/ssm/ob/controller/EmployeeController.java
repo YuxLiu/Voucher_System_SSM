@@ -15,10 +15,14 @@ import java.util.Map;
 @RequestMapping("/employee")
 public class EmployeeController {
 
-    @Autowired
     private EmployeeBiz employeeBiz;
-    @Autowired
     private DepartmentBiz departmentBiz;
+
+    @Autowired
+    public EmployeeController(EmployeeBiz employeeBiz, DepartmentBiz departmentBiz) {
+        this.employeeBiz = employeeBiz;
+        this.departmentBiz = departmentBiz;
+    }
 
     @RequestMapping("/list")
     public String list(Map<String, Object> map) {

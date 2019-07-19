@@ -13,7 +13,7 @@
 <head>
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
-    <title>爱慕课OA</title>
+    <title>OA system</title>
     <meta name="keywords" content="HTML5 Bootstrap 3 Admin Template UI Theme" />
     <meta name="description" content="AbsoluteAdmin - A Responsive HTML5 Admin UI Framework">
     <meta name="author" content="AbsoluteAdmin">
@@ -45,7 +45,7 @@
     <header class="navbar navbar-fixed-top navbar-shadow">
         <div class="navbar-branding">
             <a class="navbar-brand" href="dashboard.html">
-                <b>爱慕课</b>OA
+                <b>System </b>OA
             </a>
             <span id="toggle_sidemenu_l" class="ad ad-lines"></span>
         </div>
@@ -53,22 +53,23 @@
             <li class="dropdown menu-merge">
                 <a href="#" class="dropdown-toggle fw600 p15" data-toggle="dropdown">
                     <img src="/assets/img/avatars/5.jpg" alt="avatar" class="mw30 br64">
-                    <span class="hidden-xs pl15"> 10001 </span>
+<%--                    这里用 sessionScope.employee.name 效果一样, 都能取到 --%>
+                    <span class="hidden-xs pl15">${employee.name}</span>
                     <span class="caret caret-tp hidden-xs"></span>
                 </a>
                 <ul class="dropdown-menu list-group dropdown-persist w250" role="menu">
                     <li class="list-group-item">
-                        <a href="#" class="animated animated-short fadeInUp">
+                        <a href="/self" class="animated animated-short fadeInUp">
                             <span class="fa fa-user"></span> 个人信息
                             <span class="label label-warning"></span>
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#" class="animated animated-short fadeInUp">
+                        <a href="/to_change_password" class="animated animated-short fadeInUp">
                             <span class="fa fa-gear"></span> 设置密码 </a>
                     </li>
                     <li class="dropdown-footer">
-                        <a href="#" class="">
+                        <a href="/quit" class="">
                             <span class="fa fa-power-off pr5"></span> 退出 </a>
                     </li>
                 </ul>

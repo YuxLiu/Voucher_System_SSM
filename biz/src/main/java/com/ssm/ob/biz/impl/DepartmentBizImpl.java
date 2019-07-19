@@ -9,8 +9,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service("departmentBiz")
 public class DepartmentBizImpl implements DepartmentBiz {
-    @Autowired
+
     private DepartmentDao departmentDao;
+
+    @Autowired
+    public DepartmentBizImpl(DepartmentDao departmentDao) {
+        this.departmentDao = departmentDao;
+    }
 
     public void add(Department department) {
         departmentDao.insert(department);

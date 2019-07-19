@@ -11,8 +11,12 @@ import java.util.Map;
 @RequestMapping("/department")
 public class DepartmentController {
 
-    @Autowired
     private DepartmentBiz departmentBiz;
+
+    @Autowired
+    public DepartmentController(DepartmentBiz departmentBiz) {
+        this.departmentBiz = departmentBiz;
+    }
 
     @RequestMapping("/list")
     public String list(Map<String, Object> map) {
