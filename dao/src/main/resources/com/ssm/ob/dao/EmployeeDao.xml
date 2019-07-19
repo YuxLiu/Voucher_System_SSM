@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.ob.dao.EmployeeDao">
+<!-- type="Employee" 省略了包名, 对应 配置中的 typeAliasesPackage-->
+    <resultMap id="employee" type="Employee">
+        <id property="sn" column="sn" javaType="String"/>
+        <result property="password" column="password" javaType="String"/>
+        <result property="name" column="name" javaType="String"/>
+        <result property="departmentSn" column="department_sn" javaType="String"/>
+        <result property="post" column="post" javaType="String"/>
+<!--        通过外键 department_sn 关联的 Department 对象-->
+        <association property="department" column="department_sn" javaType="Department">
+<!--            关联对象的属性:
+                    1. 字段名不与父对象字段重复, 使用 query 语句中的 别名 避免重复.
+                    2. 可以只取部分字段-->
+            <id property="sn" column="d_sn" javaType="String"/>
+            <result property="name" column="d_name" javaType="String"/>
+        </association>
+
+    </resultMap>
+
+    <insert id="insert" parameterType="Employee">
+        insert into employee values(#{sn},#{password},#{name},#{departmentSn},#{post})
+    </insert>
+
+    <update id="update" parameterType="Employee">
+        update employee set name=#{name},password=#{password},
+        department_sn=#{departmentSn},post=#{post} where sn=#{sn}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        delete from employee where sn=#{sn}
+    </delete>
+<!--使用left join [table_name] on , 同时查询2张表, 使用别名-->
+    <select id="select" parameterType="String" resultMap="employee">
+        select e.*, d.sn d_sn, d.name d_name from employee e
+        left join department d on d.sn=e.department_sn
+        where e.sn=#{sn}
+    </select>
+
+    <select id="selectAll" resultMap="employee">
+        select e.*, d.sn d_sn, d.name d_name from employee e
+        left join department d on d.sn=e.department_sn
+    </select>
+</mapper>

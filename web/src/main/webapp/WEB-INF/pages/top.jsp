@@ -148,11 +148,11 @@
                     </a>
                     <ul class="nav sub-nav">
                         <li>
-                            <a href="#">
+                            <a href="/employee/list">
                                 <span class="glyphicon glyphicon-calendar"></span> 所有员工 </a>
                         </li>
                         <li class="active">
-                            <a href="admin_forms-validation.html">
+                            <a href="/employee/to_add">
                                 <span class="glyphicon glyphicon-check"></span> 添加员工 </a>
                         </li>
                     </ul>
@@ -165,11 +165,11 @@
                     </a>
                     <ul class="nav sub-nav">
                         <li>
-                            <a href="#">
+                            <a href="/department/list">
                                 <span class="glyphicon glyphicon-calendar"></span> 所有部门 </a>
                         </li>
                         <li class="active">
-                            <a href="admin_forms-validation.html">
+                            <a href="/department/to_add">
                                 <span class="glyphicon glyphicon-check"></span> 添加部门 </a>
                         </li>
                     </ul>
