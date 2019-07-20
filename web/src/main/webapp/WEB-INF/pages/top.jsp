@@ -94,9 +94,9 @@
                             <img src="/assets/img/avatars/3.jpg" class="img-responsive">
                         </a>
                         <div class="media-body">
-                            <div class="media-author">10001--总经理</div>
+                            <div class="media-author">${employee.name} - ${employee.post}</div>
                             <div class="media-links">
-                                <a href="pages_login.html">退出</a>
+                                <a href="/quit">退出</a>
                             </div>
                         </div>
                     </div>

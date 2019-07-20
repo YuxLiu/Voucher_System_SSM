@@ -26,13 +26,13 @@ public class DepartmentController {
 
     @RequestMapping("/to_add")
     public String toAdd(Map<String, Object> map) {
+        // 据说 mvc 会自动将页面收集的信息封装为 Department 对象
         map.put("department", new Department());
         return "department_add";
     }
 
     @RequestMapping("/add")
     public String add(Department department) {
-        // 据说 mvc 会自动将页面收集的信息封装为 Department 对象, I doubt that
         departmentBiz.add(department);
         // 重定向到控制器,直接去 department_list 静态页面是没有信息的, 要经过 map.put 添加信息
         return "redirect:list";
