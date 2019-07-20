@@ -35,7 +35,7 @@
         delete from claim_voucher where id=#{id}
     </delete>
     <!--todo: note 对应 resultMap 的两个association -->
-    <select id="select" parameterType="Integer">
+    <select id="select" resultMap="claimVoucher" parameterType="Integer">
         select cv.*, ce.name c_name, ce.post c_post, de.name d_name, de.post d_post
         from claim_voucher cv
         left join employee ce on ce.sn=cv.create_sn

@@ -45,7 +45,7 @@
     <header class="navbar navbar-fixed-top navbar-shadow">
         <div class="navbar-branding">
             <a class="navbar-brand" href="dashboard.html">
-                <b>System </b>OA
+                <b>报销单处理系统</b>
             </a>
             <span id="toggle_sidemenu_l" class="ad ad-lines"></span>
         </div>
@@ -94,7 +94,7 @@
                             <img src="/assets/img/avatars/3.jpg" class="img-responsive">
                         </a>
                         <div class="media-body">
-                            <div class="media-author">${employee.name} - ${employee.post}</div>
+                            <div class="media-author">${employee.sn} - ${employee.post}</div>
                             <div class="media-links">
                                 <a href="/quit">退出</a>
                             </div>

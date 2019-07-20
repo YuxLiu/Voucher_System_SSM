@@ -20,8 +20,8 @@
         <section id="content">
             <div class="admin-form theme-info mw500" id="login">
                 <div class="content-header">
-                    <h1> OA</h1>
-                    <p class="lead">欢迎使用自动化管理系统</p>
+                    <h1>报销单管理系统</h1>
+                    <p class="lead">请登录</p>
                 </div>
                 <div class="panel mt30 mb25">
                     <form method="post" action="login" id="contact">

@@ -61,7 +61,7 @@
                             </td>
                             <td>${emp.sn}</td>
                             <td>${emp.name}</td>
-                            <td class="text-center fw600">${emp.department.name}</td>
+                            <td class="text-left fw600">${emp.department.name}</td>
                             <td class="hidden-xs">
                                 <span class="badge badge-warning mr10 fs11">${emp.post}</span>
                             </td>
