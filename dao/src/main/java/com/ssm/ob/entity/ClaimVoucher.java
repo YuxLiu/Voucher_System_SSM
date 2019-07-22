@@ -1,12 +1,17 @@
 package com.ssm.ob.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class ClaimVoucher {
     private Integer id;
     private String cause;
     private String createSn;   // the employee
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date createTime;
+
     private String nextDealSn; // next dealer employee sn
     private Double totalAmount;
     private String status;

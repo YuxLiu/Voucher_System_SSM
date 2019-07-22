@@ -23,12 +23,13 @@
     <!--    使用由数据库生成的key, 返回到对象中-->
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="ClaimVoucher">
         insert into claim_voucher (cause, create_sn, create_time, next_deal_sn, total_amount, status)
-        values (#{cause}, #{createSn}, #{createTime}, #{totalAmount}, #{status})
+        values (#{cause}, #{createSn}, #{createTime}, #{nextDealSn}, #{totalAmount}, #{status})
     </insert>
 
     <update id="update" parameterType="ClaimVoucher">
         update claim_voucher set cause=#{cause}, create_sn=#{createSn}, create_time=#{createTime},
         next_deal_sn=#{nextDealSn}, total_amount=#{totalAmount}, status=#{status}
+        where id=#{id}
     </update>
 
     <delete id="delete" parameterType="Integer">

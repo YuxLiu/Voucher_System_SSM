@@ -120,7 +120,7 @@
             <ul class="nav sidebar-menu">
                 <li class="sidebar-label pt20">日常管理</li>
                 <li>
-                    <a href="#">
+                    <a href="/claim_voucher/deal">
                         <span class="glyphicon glyphicon-book"></span>
                         <span class="sidebar-title">待处理报销单</span>
                         <span class="sidebar-title-tray">
@@ -129,13 +129,13 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="#">
+                    <a href="/claim_voucher/self">
                         <span class="glyphicon glyphicon-home"></span>
                         <span class="sidebar-title">个人报销单</span>
                     </a>
                 </li>
                 <li>
-                    <a href="add.html">
+                    <a href="/claim_voucher/to_add">
                         <span class="fa fa-calendar"></span>
                         <span class="sidebar-title">填写报销单</span>
                     </a>

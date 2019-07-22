@@ -20,7 +20,7 @@
         VALUES (#{claimVoucherId}, #{dealerSn}, #{dealTime}, #{dealWay}, #{dealResult}, #{comment})
     </insert>
 
-    <select id="selectByClaimVoucher" parameterType="Integer">
+    <select id="selectByClaimVoucher" parameterType="Integer" resultMap="dealRecord">
         select d.*, e.name e_name, e.post e_post
         from deal_record d
                  left join employee e on d.deal_sn = e.sn

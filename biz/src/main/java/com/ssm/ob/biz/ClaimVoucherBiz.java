@@ -12,4 +12,9 @@ public interface ClaimVoucherBiz {
     ClaimVoucher get(int id);
     List<ClaimVoucherItem> getItems(int cvid);
     List<DealRecord> getRecords(int cvid);
+
+    List<ClaimVoucher> getForSelf(String sn);
+    List<ClaimVoucher> getForDeal(String sn);
+
+    void edit(ClaimVoucher claimVoucher, List<ClaimVoucherItem> items);
 }

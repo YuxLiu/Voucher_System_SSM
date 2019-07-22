@@ -5,7 +5,7 @@ import com.ssm.ob.entity.ClaimVoucherItem;
 
 import java.util.List;
 
-// 声明要收集的数据
+// voucher 和 items 的捆绑
 public class ClaimVoucherInfo {
     private ClaimVoucher claimVoucher;
     private List<ClaimVoucherItem> items;
