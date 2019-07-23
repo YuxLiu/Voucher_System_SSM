@@ -2,6 +2,7 @@ package com.ssm.ob.controller;
 
 import com.ssm.ob.biz.ClaimVoucherBiz;
 import com.ssm.ob.dto.ClaimVoucherInfo;
+import com.ssm.ob.entity.DealRecord;
 import com.ssm.ob.entity.Employee;
 import com.ssm.ob.global.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,29 @@ public class ClaimVoucherController {
         info.getClaimVoucher().setCreateSn(employee.getSn());
         claimVoucherBiz.edit(info.getClaimVoucher(), info.getItems());
         // 跳转到待处理报销单页面
+        return "redirect:deal";
+    }
+
+    @RequestMapping("/submit")
+    public String submit(int id) {
+        claimVoucherBiz.submit(id);
+        return "redirect:deal";
+    }
+
+    @RequestMapping("/to_check")
+    public String toCheck(int id, Map<String,Object> map) {
+        map.put("claimVoucher", claimVoucherBiz.get(id));
+        map.put("items", claimVoucherBiz.getItems(id));
+        map.put("records", claimVoucherBiz.getRecords(id));
+        map.put("record", new DealRecord());
+        return "claim_voucher_check";
+    }
+
+    @RequestMapping("/check")
+    public String check(HttpSession session, DealRecord dealRecord) {
+        Employee employee = (Employee)session.getAttribute("employee");
+        dealRecord.setDealerSn(employee.getSn());
+        claimVoucherBiz.deal(dealRecord);
         return "redirect:deal";
     }
 }

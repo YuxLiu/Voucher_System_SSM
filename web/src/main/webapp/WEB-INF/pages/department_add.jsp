@@ -42,7 +42,7 @@
                         </div>
                         <div class="panel-footer text-right">
                             <button type="submit" class="button"> 保存 </button>
-                            <button type="button" class="button" onclick="javascript:window.history.go(-1);"> 返回 </button>
+                            <button type="button" class="button" onclick="window.history.go(-1);"> 返回 </button>
                         </div>
                     </div>
                 </form:form>

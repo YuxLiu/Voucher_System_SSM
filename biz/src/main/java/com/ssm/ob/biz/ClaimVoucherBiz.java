@@ -17,4 +17,8 @@ public interface ClaimVoucherBiz {
     List<ClaimVoucher> getForDeal(String sn);
 
     void edit(ClaimVoucher claimVoucher, List<ClaimVoucherItem> items);
+
+    void submit(int id);
+
+    void deal(DealRecord dealRecord);
 }

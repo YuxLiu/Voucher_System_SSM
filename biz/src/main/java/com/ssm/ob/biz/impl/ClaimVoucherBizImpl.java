@@ -4,9 +4,11 @@ import com.ssm.ob.biz.ClaimVoucherBiz;
 import com.ssm.ob.dao.ClaimVoucherDao;
 import com.ssm.ob.dao.ClaimVoucherItemDao;
 import com.ssm.ob.dao.DealRecordDao;
+import com.ssm.ob.dao.EmployeeDao;
 import com.ssm.ob.entity.ClaimVoucher;
 import com.ssm.ob.entity.ClaimVoucherItem;
 import com.ssm.ob.entity.DealRecord;
+import com.ssm.ob.entity.Employee;
 import com.ssm.ob.global.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +24,14 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
     private ClaimVoucherDao claimVoucherDao;
     private ClaimVoucherItemDao claimVoucherItemDao;
     private DealRecordDao dealRecordDao;
+    private EmployeeDao employeeDao;
 
     @Autowired
-    public ClaimVoucherBizImpl(ClaimVoucherDao claimVoucherDao,
-                               ClaimVoucherItemDao claimVoucherItemDao, DealRecordDao dealRecordDao) {
+    public ClaimVoucherBizImpl(ClaimVoucherDao claimVoucherDao, ClaimVoucherItemDao claimVoucherItemDao, DealRecordDao dealRecordDao, EmployeeDao employeeDao) {
         this.claimVoucherDao = claimVoucherDao;
         this.claimVoucherItemDao = claimVoucherItemDao;
         this.dealRecordDao = dealRecordDao;
+        this.employeeDao = employeeDao;
     }
 
     public void save(ClaimVoucher claimVoucher, List<ClaimVoucherItem> items) {
@@ -92,6 +95,73 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
             }
 
         }
+    }
+
+    public void submit(int id) {
+        ClaimVoucher claimVoucher = claimVoucherDao.select(id);
+        claimVoucher.setStatus(Constant.CLAIMVOUCHER_SUBMIT);
+
+        Employee employee = employeeDao.select(claimVoucher.getCreateSn());
+        claimVoucher.setNextDealSn(employeeDao.selectByDepartmentAndPost(employee.getDepartmentSn(),
+                Constant.POST_FM).get(0).getSn());
+
+        claimVoucherDao.update(claimVoucher);
+
+        DealRecord dealRecord = new DealRecord();
+        dealRecord.setDealWay(Constant.DEAL_SUBMIT);
+        dealRecord.setDealerSn(employee.getSn());
+        dealRecord.setClaimVoucherId(id);
+        dealRecord.setDealResult(Constant.CLAIMVOUCHER_SUBMIT);
+        dealRecord.setDealTime(new Date());
+        dealRecord.setComment("无");
+        dealRecordDao.insert(dealRecord);
+
+    }
+
+    public void deal(DealRecord dealRecord) {
+        ClaimVoucher claimVoucher = claimVoucherDao.select(dealRecord.getClaimVoucherId());
+
+        Employee employee = employeeDao.select(dealRecord.getDealerSn());
+        dealRecord.setDealTime(new Date());
+
+        if (dealRecord.getDealWay().equals(Constant.DEAL_PASS)) {
+            if (claimVoucher.getTotalAmount() <= Constant.LIMIT_CHECK
+                    || employee.getPost().equals(Constant.POST_GM)) {
+                // 不需要复审
+                claimVoucher.setStatus(Constant.CLAIMVOUCHER_APPROVED);
+                claimVoucher.setNextDealSn(employeeDao.selectByDepartmentAndPost(null,
+                        Constant.POST_CASHIER).get(0).getSn());
+
+
+                dealRecord.setDealResult(Constant.CLAIMVOUCHER_APPROVED);
+            } else {
+                claimVoucher.setStatus(Constant.CLAIMVOUCHER_RECHECK);
+                claimVoucher.setNextDealSn(employeeDao.selectByDepartmentAndPost(null,
+                        Constant.POST_GM).get(0).getSn());
+
+
+                dealRecord.setDealResult(Constant.CLAIMVOUCHER_RECHECK);
+            }
+        } else if (dealRecord.getDealWay().equals(Constant.DEAL_BACK)) {
+            claimVoucher.setStatus(Constant.CLAIMVOUCHER_BACK);
+            claimVoucher.setNextDealSn(claimVoucher.getCreateSn());
+
+            dealRecord.setDealResult(Constant.CLAIMVOUCHER_BACK);
+
+        } else if (dealRecord.getDealWay().equals(Constant.DEAL_REJECT)) {
+            claimVoucher.setStatus(Constant.CLAIMVOUCHER_TERMINATED);
+            claimVoucher.setNextDealSn(claimVoucher.getCreateSn());
+
+            dealRecord.setDealResult(Constant.CLAIMVOUCHER_TERMINATED);
+
+        } else if (dealRecord.getDealWay().equals(Constant.DEAL_PAID)) {
+            claimVoucher.setStatus(Constant.CLAIMVOUCHER_TERMINATED);
+            claimVoucher.setNextDealSn(claimVoucher.getCreateSn());
+
+            dealRecord.setDealResult(Constant.CLAIMVOUCHER_PAID);
+        }
+
+
     }
 
 
