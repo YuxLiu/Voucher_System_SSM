@@ -1,4 +1,4 @@
 # ssm_ob
 - Java Web Application 
-- Spring SpringMVC Mybatis
+- using Spring + SpringMVC + Mybatis
 - Voucher Management System
